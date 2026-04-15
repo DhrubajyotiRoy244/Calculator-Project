@@ -1,3 +1,4 @@
+const API_URL = "https://api.calculator.com";
 const display = document.getElementById("display");
 
 function appendValue(value) {
