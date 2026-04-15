@@ -16,12 +16,14 @@ function calculate() {
     try {
         let expression = display.value;
 
+        // Handle A%B → (A/100)*B
         expression = expression.replace(
-            /(\d+(\.\d+)?)\s*%\s*(\d+(\.\d+)?)/g,
-            (_, a, __, b) => '(${a}/100)*${b}'
+            /(\d+)%(\d+)/g,
+            (_, a, b) => `(${a}/100)*${b}`
         );
 
-        expression = expression.replace(/(\d+(\.\d+)?)%/g, "($1/100)");
+        // Handle remaining % (like 50%)
+        expression = expression.replace(/%/g, "/100");
 
         display.value = eval(expression);
     } catch {
